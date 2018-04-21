@@ -45,7 +45,7 @@ def homepage(request):
     else:
         user = User.objects.get(id = request.session['user_id'])
         all_friends = user.friend_of.all()
-        not_friends = User.objects.exclude(friend_of = user)
+        not_friends = User.objects.exclude(friend_of = user).exclude(id = request.session['user_id'])
         
         context = {
             'user': user,
@@ -54,7 +54,29 @@ def homepage(request):
         }
         return render(request, 'redo_app/homepage.html', context)
     
+def view_friend(request, id):
+    if 'name' not in request.session:
+        return redirect('/')
+    context = {
+        'user': User.objects.get(id = id)
+    }
+    return render(request, 'belt_app/user_profile.html', context)
 
+def add_friend(request, id):
+    if 'name' not in request.session:
+        return redirect('/')
+    user = User.objects.get(id = request.session['user_id'])
+    friend = User.objects.get(id = id)
+    user.friend_of.add(friend)
+    return redirect('/home')
+
+def delete_friend(request, id):
+    if 'name' not in request.session:
+        return redirect('/')
+    user = User.objects.get(id = request.session['user_id'])
+    friend = User.objects.get(id = id)
+    user.friend_of.remove(friend)
+    return redirect('/home')
 
 
 
