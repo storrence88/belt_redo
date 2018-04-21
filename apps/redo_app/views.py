@@ -60,7 +60,7 @@ def view_friend(request, id):
     context = {
         'user': User.objects.get(id = id)
     }
-    return render(request, 'belt_app/user_profile.html', context)
+    return render(request, 'redo_app/user_profile.html', context)
 
 def add_friend(request, id):
     if 'name' not in request.session:
