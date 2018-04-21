@@ -1,0 +1,75 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'belt_app/css/styles.css' %}" media="screen" title="no title" charset="utf-8">
+    <title>Registration and Login</title>
+</head>
+    <body>
+        <div class="wrapper">
+            <h1>Welcome!</h1>
+            <p>Please register or login below!</p>
+
+            {% if messages %} 
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %} 
+            {% endif %}
+
+            <h2>Login</h2>
+            <form action="/login" method="POST">
+                {% csrf_token %}
+                <div>
+                    <label for="email">Email Address</label>
+                    <input type="text" name="email">
+                </div>
+
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" name="password">
+                </div>
+
+                <button class="button" type="submit">Login</button>
+            </form>
+
+            <h2>Register</h2>
+            <form action="/register" method="POST">
+                {% csrf_token %}
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" name="name">
+                </div>
+
+                <div>
+                    <label for="alias">Alias</label>
+                    <input type="text" name="alias">
+                </div>
+
+                <div>
+                    <label for="email">Email</label>
+                    <input type="text" name="email">
+                </div>
+
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" name="password">
+                    <p>*Password should be at least 8 characters</p>
+                </div>
+
+                <div>
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" name="confirm_password">
+                </div>
+
+                <div>
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" name="dob">
+                </div>
+
+                <button class="button" type="submit">Register</button>
+            </form>
+        </div>
+    </body>
+</html>

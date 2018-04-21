@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Friends</title>
+    </head>
+    <body>
+        <h1>Hello, {{request.session.name}}!</h1>
+        <a href="/logout">Logout</a>
+
+        {% if all_friends %}
+        <h2>Here is the list of your friends:</h2>
+        <table>
+            <th>
+                <tr>
+                    <td>Alias</td>
+                    <td>Action</td>
+                </tr>
+            </th>
+            {% for friend in all_friends %}
+            <tr>
+                <td>
+                    <a href="/user/{{friend.id}}">{{ friend.alias }}</a>
+                </td>
+                <td>
+                    <a href="/user/delete/{{friend.id}}">Remove from Friends</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h2>You currently have no friends...</h2>
+        {% endif %}
+
+        <p>Other Users you are not friends with:</p>
+        <table>
+            <th>
+                <tr>
+                    <td>Alias</td>
+                    <td>Action</td>
+                </tr>
+            </th>
+            {% for not in not_friend %}
+            <tr>
+                <td>
+                    <a href="/user/{{not.id}}">{{ not.alias }}</a>
+                </td>
+                <td>
+                    <a href="/user/add/{{not.id}}">Add as Friend</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
