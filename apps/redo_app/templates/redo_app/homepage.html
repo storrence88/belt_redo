@@ -6,17 +6,18 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
             crossorigin="anonymous">
-        <title>Friends</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'redo_app/css/styles.css' %}" media="screen" title="no title" charset="utf-8">
+        <title>Welcome to DojoFriends</title>
     </head>
     <body>
         <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#">DojoFriends</a>
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'redo_app/images/binaryyinyang.png/' %}" width="40" height="40" alt="">
+            </a>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link active" href="/home">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/logout">Logout</a>
+                    <a class="nav-link active btn btn-danger" href="/logout">Logout</a>
                 </li>
             </ul>
         </nav>
@@ -24,44 +25,40 @@
             <h1>Hello, {{request.session.name}}!</h1>
             
             {% if all_friends %}
-            <h2>Here is the list of your friends:</h2>
-            <table>
-                <th>
-                    <tr>
-                        <td>Alias</td>
-                        <td>Action</td>
-                    </tr>
-                </th>
+            <h4>Here is the list of your friends:</h4>
+            <table class="table table-striped">
+                <tr>
+                    <th scope="col">Alias</th>
+                    <th scope="col">Action</th>
+                </tr>
                 {% for friend in all_friends %}
                 <tr>
                     <td>
-                        <a href="/user/{{friend.id}}">{{ friend.alias }}</a>
+                        <a class="btn btn-outline-primary btn-sm" href="/user/{{friend.id}}">{{ friend.alias }}</a>
                     </td>
                     <td>
-                        <a href="/user/delete/{{friend.id}}">Remove from Friends</a>
+                        <a class="btn btn-outline-danger btn-sm" href="/user/delete/{{friend.id}}">Remove from Friends</a>
                     </td>
                 </tr>
                 {% endfor %}
             </table>
             {% else %}
-            <h2>You currently have no friends...</h2>
+            <h4>You currently have no friends...</h4>
             {% endif %}
             
-            <h2>Other Users you are not friends with:</h2>
-            <table>
-                <th>
-                    <tr>
-                        <td>Alias</td>
-                        <td>Action</td>
-                    </tr>
-                </th>
+            <h4>Other Users you are not friends with:</h4>
+            <table class="table table-striped">
+                <tr>
+                    <th>Alias</th>
+                    <th>Action</th>
+                </tr>
                 {% for not in not_friends %}
                 <tr>
                     <td>
-                        <a href="/user/{{not.id}}">{{ not.alias }}</a>
+                        <a class="btn btn-outline-primary btn-sm" href="/user/{{not.id}}">{{ not.alias }}</a>
                     </td>
                     <td>
-                        <a href="/user/add/{{not.id}}">Add as Friend</a>
+                        <a class="btn btn-outline-success btn-sm" href="/user/add/{{not.id}}">Add as Friend</a>
                     </td>
                 </tr>
                 {% endfor %}

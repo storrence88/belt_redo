@@ -11,6 +11,9 @@ def index(request):
         return render(request, 'redo_app/index.html')
     else:
         return render(request, 'redo_app/homepage.html')
+
+def log_reg(request):
+    return render(request, 'redo_app/login.html')
     
 def register(request):
     if User.UserManager.check_registration(request.POST, request):
@@ -21,7 +24,7 @@ def register(request):
         return redirect('/home')
     else:
         valid = False
-        return redirect('/')
+        return redirect('/log_reg')
 
 def login(request):
     if User.UserManager.check_login(request.POST, request):
@@ -33,7 +36,7 @@ def login(request):
         return redirect('/home')
     else:
         valid = False
-        return redirect('/')
+        return redirect('/log_reg')
 
 def logout(request):
     request.session.clear()

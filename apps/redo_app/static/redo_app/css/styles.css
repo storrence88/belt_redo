@@ -1,6 +1,18 @@
 .button {
-    margin-left: 50px;
+    margin-left: 280px;
 }
-h1 {
-    color: red;
+
+#button2 {
+    margin-left: 263px;
+}
+
+form {
+    margin-top: 25px;
+}
+h2 {
+    margin-top: 25px;
+}
+
+h4{
+    margin-top: 40px;
 }
